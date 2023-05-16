@@ -1,22 +1,30 @@
 import '../css/style.css'
 import { Actor, Engine, Vector } from "excalibur"
 import { Resources, ResourceLoader } from './resources.js'
+import { Exploder } from './exploder'
+
 
 export class Game extends Engine {
 
     constructor() {
-        super({ width: 800, height: 600 })
+        super({ width: 1530, height: 860 })
         this.start(ResourceLoader).then(() => this.startGame())
     }
 
+    
     startGame() {
+        const Background = new Actor();
+        Background.graphics.use(Resources.Background.toSprite());
+        Background.pos = new Vector(767, 430);
+        Background.scale = new Vector(0.8, 0.8);
+        this.add(Background);
         console.log("start de game!")
-        const fish = new Actor()
-        fish.graphics.use(Resources.Fish.toSprite())
-        fish.pos = new Vector(400, 300)
-        fish.vel = new Vector(-10,0)
-        this.add(fish)
+
+    let exploder = new Exploder()
+        this.add(exploder)
     }
 }
+
+
 
 new Game()
