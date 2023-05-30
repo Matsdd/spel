@@ -5,22 +5,20 @@ import { Laser } from './laser'
 export class LaserBingus extends Actor{
 
 timer = 0;
-Enemy
 
-constructor(Exploder, x, y) {
+constructor(x, y) {
     super({width:Resources.LaserBingus.width, height:Resources.LaserBingus.height})
-    this.Enemy = Exploder;
     this.pos = new Vector(x, y)
 }
 
 onInitialize(Engine) {
 this.graphics.use(Resources.LaserBingus.toSprite())
-this.scale = new Vector(0.4, 0.4);
+this.scale = new Vector(0.35, 0.35);
+
 
 }
 
 onPostUpdate(Engine) {
-    if (this.pos.y == this.Enemy.pos.y){
     this.timer += 1;
 
     if (this.timer > 60) {
@@ -29,7 +27,8 @@ onPostUpdate(Engine) {
 
         this.timer = 0;
     }
+
+    
 }
 }
 
-}

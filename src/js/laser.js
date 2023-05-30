@@ -1,5 +1,6 @@
 import { Actor, Engine, Vector } from "excalibur"
 import { Resources, ResourceLoader } from './resources.js'
+import { Exploder } from './exploder'
 
 export class Laser extends Actor{
 
@@ -8,10 +9,18 @@ export class Laser extends Actor{
         this.pos = new Vector(x, y)
     }
 
+onInitialize(Engine) {
+    this.graphics.use(Resources.Laser.toSprite())
+    this.vel = new Vector(800,0)
+    this.scale = new Vector(1, 1);
 
-    onInitialize(Engine) {
-        this.graphics.use(Resources.Laser.toSprite())
-        this.vel = new Vector(800,0)
-        this.scale = new Vector(1, 1);
+    this.on('collisionstart', (event) => {
+        if (event.other instanceof Exploder) {
+            this.kill()
+            event.other.hp -= 1
+            console.log('event.other.hp')
         }
+    })
+    }
+
 }
