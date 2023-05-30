@@ -7,7 +7,7 @@ export class Exploder extends Actor{
 
 randomNumber
 lane
-hp = 15
+hp = 10
 lane1 = false;
 lane2 = false;
 lane3 = false;

@@ -1,6 +1,7 @@
 import { Actor, Engine, Vector } from "excalibur"
 import { Resources, ResourceLoader } from './resources.js'
-import { Laser } from './laser'
+import { Laser } from './laser.js'
+import { lane } from './lane.js'
 
 export class LaserBingus extends Actor{
 
@@ -14,8 +15,6 @@ constructor(x, y) {
 onInitialize(Engine) {
 this.graphics.use(Resources.LaserBingus.toSprite())
 this.scale = new Vector(0.35, 0.35);
-
-
 }
 
 onPostUpdate(Engine) {
@@ -27,8 +26,6 @@ onPostUpdate(Engine) {
 
         this.timer = 0;
     }
-
-    
 }
 }
 
