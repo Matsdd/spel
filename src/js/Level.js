@@ -12,17 +12,15 @@ import { Selection } from './selection'
 
 import { Spot } from './spot'
 
-export class Game extends Engine {
-
-catfood = 20;
-catnip = 5;
-
+export class Level extends Engine {
 
     constructor() {
         super({ width: 1530.01, height: 860.01 })
-        this.start(ResourceLoader).then(() => this.startGame())
         // this.showDebug(true)
     }
+
+    catfood = 20;
+    catnip = 5;
 
     onInitialize(Engine, catfood) {
         const Background = new Actor();
@@ -36,10 +34,6 @@ catnip = 5;
 
         let settings = new Settings();
         this.add(settings);
-
-        // Settings.on('pointerup', (event) => {
-        //     console.log("jaaaa")
-        // });
 
         let selection = new Selection();
         this.add(selection);
