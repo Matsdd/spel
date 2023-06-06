@@ -12,11 +12,10 @@ export class Game extends Engine {
 
 catfood = 20;
 catnip = 5;
-
     constructor() {
         super({ width: 1530.01, height: 860.01 })
         this.start(ResourceLoader).then(() => this.startGame())
-
+        console.log("catnip")
         // this.showDebug(true)
     }
 
