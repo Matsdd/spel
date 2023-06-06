@@ -5,7 +5,6 @@ import { Enemy } from './enemy'
 export class Laser extends Actor{
 
     constructor(x, y) {
-        console.log("i am laser")
         super({width:Resources.Laser.width, height:Resources.Laser.height})
         this.pos = new Vector(x, y)
     }
@@ -19,7 +18,6 @@ onInitialize(Engine) {
         if (event.other instanceof Enemy) {
             this.kill()
             event.other.hp -= 1
-            console.log('event.other.hp')
         }
     })
     }

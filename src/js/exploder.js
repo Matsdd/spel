@@ -13,13 +13,17 @@ lane1 = false;
 lane2 = false;
 lane3 = false;
 lane4 = false;
+game;
 
     getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
 
-  constructor() {
+  constructor(game) {
     super({width:Resources.Exploder.width/4, height:Resources.Exploder.height/4})
+
+    this.game = game
+
     this.randomNumber = this.getRandomInt(4)
     switch (this.randomNumber) {
       case 0:
@@ -49,7 +53,7 @@ this.scale = new Vector(0.4, 0.4);
 
 onPreUpdate(Engine) {
   if (this.hp <= 0) {
-    this.kill()
+    this.kill(this.game.moneyAdd())
     let explosion = new Explosion(this.pos.x, this.pos.y)
       Engine.currentScene.add(explosion)
     const timer = new Timer({
