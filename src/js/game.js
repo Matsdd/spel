@@ -1,5 +1,6 @@
 import '../css/style.css'
-import { Actor, Engine, Vector, Timer } from "excalibur"
+import * as ex from 'excalibur'
+import { Actor, Engine, Vector, Timer, TextAlign } from "excalibur"
 import { Resources, ResourceLoader } from './resources.js'
 import { Exploder } from './exploder'
 import { LaserBingus } from './laserBingus'
@@ -9,8 +10,8 @@ import { Spot } from './spot'
 
 export class Game extends Engine {
 
-catfood = 0;
-
+catfood = 20;
+catnip = 5;
 
     constructor() {
         super({ width: 1530.01, height: 860.01 })
@@ -20,6 +21,30 @@ catfood = 0;
     }
 
     onInitialize(Engine) {
+        const Background = new Actor();
+        Background.graphics.use(Resources.Background.toSprite());
+        Background.pos = new Vector(767, 430);
+        Background.scale = new Vector(0.8, 0.8);
+        this.add(Background);
+
+        const CurrencyCounter = new Actor();
+        CurrencyCounter.graphics.use(Resources.CurrencyCounter.toSprite());
+        CurrencyCounter.pos = new Vector(100, 100);
+        CurrencyCounter.scale = new Vector(0.4, 0.4)
+        this.add(CurrencyCounter);
+
+        const Settings = new Actor();
+        Settings.graphics.use(Resources.Settings.toSprite());
+        Settings.pos = new Vector(1430, 100);
+        Settings.scale = new Vector(0.4, 0.4)
+        this.add(Settings);
+
+        const Selection = new Actor();
+        Selection.graphics.use(Resources.Selection.toSprite());
+        Selection.pos = new Vector(700, 100);
+        Selection.scale = new Vector(0.4, 0.4)
+        this.add(Selection);
+
         const timer = new Timer({
           fcn: () => this.spawn(),
           repeats: true,
@@ -29,6 +54,29 @@ catfood = 0;
           timer.start()
 
           const spot = new Spot
+
+
+          this.catfoodLabel = new ex.Label({
+            text: '9999',
+            pos: ex.vec(20, 70),
+            font: new ex.Font({
+                size: 50,
+                unit: ex.FontUnit.Px,
+                textAlign: TextAlign.left
+            })
+        });
+        this.add(this.catfoodLabel)
+
+        this.catnipLabel = new ex.Label({
+            text: '9999',
+            pos: ex.vec(20, 150),
+            font: new ex.Font({
+                size: 50,
+                unit: ex.FontUnit.Px,
+                textAlign: TextAlign.left
+            })
+        });
+        this.add(this.catnipLabel)
 
         //   placeSpots()
     }
@@ -40,7 +88,7 @@ catfood = 0;
     // }
 
 
-    spawn() {   
+    spawn() {
       let exploder = new Exploder()
           this.add(exploder)
     }
@@ -60,31 +108,7 @@ catfood = 0;
     // }
 
 
-    startGame() {
-        const Background = new Actor();
-        Background.graphics.use(Resources.Background.toSprite());
-        Background.pos = new Vector(767, 430);
-        Background.scale = new Vector(0.8, 0.8);
-        this.add(Background);
-
-        const CurrencyCounter = new Actor();
-        CurrencyCounter.graphics.use(Resources.CurrencyCounter.toSprite());
-        CurrencyCounter.pos = new Vector(80, 100);
-        CurrencyCounter.scale = new Vector(0.4, 0.4)
-        this.add(CurrencyCounter);
-
-        const Settings = new Actor();
-        Settings.graphics.use(Resources.Settings.toSprite());
-        Settings.pos = new Vector(1430, 100);
-        Settings.scale = new Vector(0.4, 0.4)
-        this.add(Settings);
-
-        const Selection = new Actor();
-        Selection.graphics.use(Resources.Selection.toSprite());
-        Selection.pos = new Vector(700, 100);
-        Selection.scale = new Vector(0.4, 0.4)
-        this.add(Selection);
-        
+    startGame() {        
         console.log("start de game!")
 
     let laserBingus1 = new LaserBingus(350, 300)
