@@ -5,6 +5,7 @@ import { Enemy } from './enemy'
 export class Laser extends Actor{
 
     constructor(x, y) {
+        console.log("i am laser")
         super({width:Resources.Laser.width, height:Resources.Laser.height})
         this.pos = new Vector(x, y)
     }
