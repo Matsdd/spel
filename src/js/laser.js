@@ -1,6 +1,6 @@
 import { Actor, Engine, Vector } from "excalibur"
 import { Resources, ResourceLoader } from './resources.js'
-import { Exploder } from './exploder'
+import { Enemy } from './enemy'
 
 export class Laser extends Actor{
 
@@ -15,7 +15,7 @@ onInitialize(Engine) {
     this.scale = new Vector(1, 1);
 
     this.on('collisionstart', (event) => {
-        if (event.other instanceof Exploder) {
+        if (event.other instanceof Enemy) {
             this.kill()
             event.other.hp -= 1
             console.log('event.other.hp')

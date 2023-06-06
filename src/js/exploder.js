@@ -1,9 +1,10 @@
 import { Actor, Engine, Vector, Timer } from "excalibur"
 import { Resources, ResourceLoader } from './resources.js'
 import { Explosion } from './explosion'
+import { Enemy } from './enemy.js'
 import * as ex from 'excalibur'
 
-export class Exploder extends Actor{
+export class Exploder extends Enemy{
 
 randomNumber
 lane
@@ -44,8 +45,6 @@ this.graphics.use(Resources.Exploder.toSprite())
 this.pos = new Vector(1600, this.lane)
 this.vel = new Vector(-20,0)
 this.scale = new Vector(0.4, 0.4);
-
-
 }
 
 onPreUpdate(Engine) {
@@ -57,14 +56,16 @@ onPreUpdate(Engine) {
       fcn: () => this.explode(explosion),
       repeats: true,
       interval: 300,
-    })  
+    })    
       Engine.currentScene.add(timer)
       timer.start()
+  }
+  if (this.hp < 3) {
+    this.graphics.use(Resources.DamageExploder.toSprite())
   }
 }
 
 explode(explosion) {    
   explosion.kill()
 }
-
 }
